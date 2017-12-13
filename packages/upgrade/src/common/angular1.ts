@@ -222,6 +222,7 @@ let angular: {
                  IInjectorService,
   module: (prefix: string, dependencies?: string[]) => IModule,
   element: (e: Element | string) => IAugmentedJQuery,
+  injector: (modules: Array<string|IInjectable>, strictDI?: boolean) => IInjectorService,
   version: {major: number},
   resumeBootstrap: () => void,
   getTestability: (e: Element) => ITestabilityService
@@ -229,6 +230,7 @@ let angular: {
   bootstrap: noNg,
   module: noNg,
   element: noNg,
+  injector: noNg,
   version: noNg,
   resumeBootstrap: noNg,
   getTestability: noNg
@@ -270,7 +272,8 @@ export const module = (prefix: string, dependencies?: string[]) =>
     angular.module(prefix, dependencies);
 
 export const element = (e: Element | string) => angular.element(e);
-
+export const injector = (modules: Array<string|IInjectable>, strictDI?: boolean) =>
+    angular.injector(modules, strictDI);
 export const resumeBootstrap = () => angular.resumeBootstrap();
 
 export const getTestability = (e: Element) => angular.getTestability(e);

@@ -22,7 +22,7 @@ const packageMap = {
   'platform-webworker-dynamic': 'platform-webworker-dynamic/index.ts',
   router: ['router/index.ts', 'router/testing/index.ts', 'router/upgrade/index.ts'],
   'service-worker': ['service-worker/index.ts'],
-  upgrade: ['upgrade/index.ts', 'upgrade/static/index.ts']
+  upgrade: ['upgrade/index.ts', 'upgrade/static/index.ts', 'upgrade/static/testing/index.ts']
 };
 
 

@@ -66,6 +66,7 @@ module.exports = new Package('angular-api', [basePackage, typeScriptPackage])
       'service-worker/index.ts',
       'upgrade/index.ts',
       'upgrade/static/index.ts',
+      'upgrade/static/testing/index.ts',
     ];
 
     // API Examples

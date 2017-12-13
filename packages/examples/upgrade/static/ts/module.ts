@@ -10,7 +10,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {UpgradeComponent, UpgradeModule, downgradeComponent, downgradeInjectable} from '@angular/upgrade/static';
 
-interface Hero {
+export interface Hero {
   name: string;
   description: string;
 }
@@ -29,7 +29,7 @@ interface Hero {
              </div>
              <button (click)="addHero.emit()">Add Hero</button>`,
 })
-class Ng2HeroesComponent {
+export class Ng2HeroesComponent {
   @Input() heroes: Hero[];
   @Output() addHero = new EventEmitter();
   @Output() removeHero = new EventEmitter();
@@ -39,7 +39,7 @@ class Ng2HeroesComponent {
 // #docregion ng2-heroes-service
 // This Angular service will be "downgraded" to be used in AngularJS
 @Injectable()
-class HeroesService {
+export class HeroesService {
   heroes: Hero[] = [
     {name: 'superman', description: 'The man of steel'},
     {name: 'wonder woman', description: 'Princess of the Amazons'},
@@ -65,7 +65,7 @@ class HeroesService {
 // #docregion ng1-hero-wrapper
 // This Angular directive will act as an interface to the "upgraded" AngularJS component
 @Directive({selector: 'ng1-hero'})
-class Ng1HeroComponentWrapper extends UpgradeComponent implements OnInit, OnChanges, DoCheck,
+export class Ng1HeroComponentWrapper extends UpgradeComponent implements OnInit, OnChanges, DoCheck,
     OnDestroy {
   // The names of the input and output properties here must match the names of the
   // `<` and `&` bindings in the AngularJS component that is being wrapped
@@ -75,16 +75,6 @@ class Ng1HeroComponentWrapper extends UpgradeComponent implements OnInit, OnChan
     // We must pass the name of the directive as used by AngularJS to the super
     super('ng1Hero', elementRef, injector);
   }
-
-  // For this class to work when compiled with AoT, we must implement these lifecycle hooks
-  // because the AoT compiler will not realise that the super class implements them
-  ngOnInit() { super.ngOnInit(); }
-
-  ngOnChanges(changes: SimpleChanges) { super.ngOnChanges(changes); }
-
-  ngDoCheck() { super.ngDoCheck(); }
-
-  ngOnDestroy() { super.ngOnDestroy(); }
 }
 // #enddocregion
 
@@ -104,7 +94,7 @@ class Ng1HeroComponentWrapper extends UpgradeComponent implements OnInit, OnChan
   // We must import `UpgradeModule` to get access to the AngularJS core services
   imports: [BrowserModule, UpgradeModule]
 })
-class Ng2AppModule {
+export class Ng2AppModule {
   ngDoBootstrap() { /* this is a placeholder to stop the boostrapper from complaining */
   }
 }
@@ -116,7 +106,7 @@ class Ng2AppModule {
 // #docregion ng1-module
 // This Angular 1 module represents the AngularJS pieces of the application
 declare var angular: ng.IAngularStatic;
-const ng1AppModule = angular.module('ng1AppModule', []);
+export const ng1AppModule = angular.module('ng1AppModule', []);
 // #enddocregion
 
 // #docregion ng1-hero
@@ -159,7 +149,7 @@ ng1AppModule.component('exampleApp', {
         'heroesService',
         function(heroesService: HeroesService) { this.heroesService = heroesService; }
       ],
-      // This template make use of the downgraded `ng2-heroes` component
+      // This template makes use of the downgraded `ng2-heroes` component.
       // Note that because its element is compiled by AngularJS we must use kebab-case attributes
       // for inputs and outputs
       template: `<link rel="stylesheet" href="./styles.css">

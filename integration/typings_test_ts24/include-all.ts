@@ -20,7 +20,8 @@ import * as platformServer from '@angular/platform-server';
 import * as platformServerTesting from '@angular/platform-server/testing';
 import * as router from '@angular/router';
 import * as routerTesting from '@angular/router/testing';
-import * as upgrade from '@angular/upgrade';
+import * as upgrade from '@angular/upgrade/static';
+import * as upgradeTesting from '@angular/upgrade/static/testing';
 
 export default {
   compiler,
@@ -37,5 +38,6 @@ export default {
   platformServerTesting,
   router,
   routerTesting,
-  upgrade
+  upgrade,
+  upgradeTesting
 };
